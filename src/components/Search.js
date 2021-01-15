@@ -5,7 +5,7 @@ import SearchResults from "./SearchResults";
 
 const Search = (props) => {
   let [inputValue, setInputValue] = useState("");
-  let [searchResultsData, setSearchResultsData] = useState([]);
+  let [searchResultsData, setSearchResultsData] = useState({});
   let [showSearchResults, toggleSearchResults] = useState(false);
 
   useEffect(() => {
@@ -18,8 +18,14 @@ const Search = (props) => {
   }, [inputValue]);
 
   const search = () => {
-    let fuse = new Fuse(props.dogBreedList);
+    const options = {
+      includeScore: true,
+      keys: ["."],
+    };
+    let fuse = new Fuse(props.dogBreedList, options);
+    console.log(fuse);
     let results = fuse.search(inputValue);
+    console.log(results);
     setSearchResultsData(results.map((item) => item.item));
   };
 
@@ -43,7 +49,6 @@ const Search = (props) => {
           value={inputValue}
           onChange={handleInput}
         ></input>
-        <button type="submit">woof (go)</button>
       </form>
       {showSearchResults && (
         <SearchResults
