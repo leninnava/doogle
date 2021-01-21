@@ -1,9 +1,8 @@
-import React from "react";
-import { render } from "react-dom";
+import * as React from "react";
 
-const Content = (props) => {
+function Content(props) {
   return (
-    <React.Fragment>
+    <>
       <h1>Here goes your content.</h1>
       <h2>{props.contentData.dogBreed}</h2>
       <p>{props.contentData.dogInformation}</p>
@@ -11,8 +10,8 @@ const Content = (props) => {
         <img src={image} key={i} />
       ))}
       <button onClick={props.goToHome}>take me home</button>
-    </React.Fragment>
+    </>
   );
-};
+}
 
 export default Content;
